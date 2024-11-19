@@ -1,0 +1,26 @@
+import React from 'react';
+
+interface NavigationDotsProps {
+  total: number;
+  current: number;
+  onSelect: (index: number) => void;
+}
+
+export default function NavigationDots({ total, current, onSelect }: NavigationDotsProps) {
+  return (
+    <div className="absolute bottom-6 left-1/2 -translate-x-1/2 flex gap-2">
+      {Array.from({ length: total }, (_, index) => (
+        <button
+          key={index}
+          onClick={() => onSelect(index)}
+          className={`w-2.5 h-2.5 rounded-full transition-all duration-200 ${
+            current === index 
+              ? 'bg-white scale-125' 
+              : 'bg-white/50 hover:bg-white/80'
+          }`}
+          aria-label={`Go to slide ${index + 1}`}
+        />
+      ))}
+    </div>
+  );
+}
